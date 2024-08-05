@@ -1,0 +1,9 @@
+{
+    "apps": [
+        {
+            "name": "forma2-App",
+            "script": "npm run dev",
+            "args": ""
+        }
+    ]
+}
