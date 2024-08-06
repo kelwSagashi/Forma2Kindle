@@ -1,8 +1,10 @@
 const express = require("express");
 const cors = require('cors');
 const morgan = require('morgan');
-const PostgresConnection = require("./postgres/postgres");
+const db = require("./postgres/postgres");
 const { Pool } = require("pg");
+const { AllRoutes } = require("./src/routes");
+const UserSchema = require("./src/models/user");
 
 const app = express(cors());
 
@@ -24,13 +26,12 @@ app.get('/', (req, res) => {
     })
 });
 
-const PORT = 8080;
+app.use('/api', AllRoutes);
 
-const db_connect = new PostgresConnection();
-db_connect.connection();
+const PORT = process.env.SERVER_PORT | 8080;
 
 app.listen(PORT, function(){
-    console.lof(process.env.SERVER_PORT);
+    console.log();
     console.log(`Servidor rodando em: http://localhost:${PORT}`);
     console.log("Servidor Online!")
 })
