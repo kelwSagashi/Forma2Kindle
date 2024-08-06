@@ -1,5 +1,5 @@
 import React from 'react'
-import { User } from '../../../../utils/Users/types'
+import { User } from '../../../../util/Users/types'
 
 interface UserListeItemProps {
   user: User

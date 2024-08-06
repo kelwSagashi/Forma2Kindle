@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Users } from "../../../utils/Users/types";
+import { Users } from "../../../types/Users";
 import { UseAxiosAdapter } from "../../../utils/fetch/Adapters/Axios";
 import { UseFetch } from "../../../utils/fetch/Hook";
 import UserListItem from "./Item";
