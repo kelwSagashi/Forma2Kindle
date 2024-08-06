@@ -1,13 +1,13 @@
 FROM node
 
-WORKDIR /usr/src/app
+EXPOSE 8080
+
+WORKDIR /src
 
 COPY package*.json ./
 
 RUN npm install
 
 COPY . .
-
-EXPOSE 8080
 
 CMD ["npm", "start"]

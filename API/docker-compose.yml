@@ -1,29 +1,39 @@
 services:
-  postgres-forma2:
+  postgres_forma2:
+    env_file:
+      - .env
     image: postgres
-    container_name: postgres-forma2
+    container_name: postgres_forma2
     restart: always
     ports:
-      - ${DB_PORT}:5432
+      - ${DB_PORT}:${DB_PORT_EXPOSE}
     environment:
-      - POSTGRES_DB=${DB_NAME}
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
       - ./data:/data/postgres
   server:
     image: node:20.11.1
     container_name: forma2-api
+    build: 
+      context: .
     restart: always
     env_file:
       - .env
+    environment:
+      PG_DB: ${DB_NAME}
+      PG_USER: ${DB_USER}
+      PG_PASSWORD: ${DB_PASSWORD}
+      PG_HOST: ${DB_HOST}
+      SERVER_PORT: ${SERVER_PORT}
     ports:
       - ${SERVER_PORT}:${SERVER_PORT}
     depends_on:
-      - postgres-forma2
+      - postgres_forma2
     volumes:
-      - .:/usr/src/app
-    working_dir: /usr/src/app
+      - .:/src
+    working_dir: /src
     command: npm start
     logging: 
       driver: "json-file"
