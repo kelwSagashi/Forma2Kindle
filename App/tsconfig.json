@@ -1,5 +1,15 @@
 {
   "files": [],
+  "compilerOptions": {
+    "lib": ["ESNext"],
+    "strict": false,
+    "baseUrl": "./",
+    "paths": {
+      "@utils/*": [
+          "./src/utils/*"
+      ],
+    },
+  },
   "references": [
     {
       "path": "./tsconfig.app.json"
