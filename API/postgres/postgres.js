@@ -1,25 +1,36 @@
-const { Pool } = require("pg");
 const { Sequelize } = require("sequelize");
 
 class PostgresConnection {
     constructor(){
-        this.sequelize = new Sequelize('forma2', 'docker', 'docker', {
-            host: process.env.DB_HOST,
-            dialect: 'postgres'
-        });
-
-        // this.pool = new Pool({
-        //     host: 'postgres',
-        //     port: 4444,
-        //     user: 'docker',
-        //     password: '1234',
-        //     database: 'forma2',
-        // })
+        try {
+            console.log({
+                db_name: process.env.PG_DB,
+                db_user: process.env.PG_USER,
+                db_password: process.env.PG_PASSWORD,
+                db_host: process.env.PG_HOST,
+            })
+            const db_name = process.env.PG_DB;
+            const db_user = process.env.PG_USER;
+            const password = process.env.PG_PASSWORD;
+            const db_host = process.env.PG_HOST;
+            this.sequelize = new Sequelize(
+                db_name, 
+                db_user, 
+                password, 
+                {
+                    host: db_host,
+                    dialect: 'postgres'
+                }
+            );
+        } catch (error) {
+            console.log('Sequelize instance error: ' + error);
+        }
     }
 
     async connection() {
         try {
-            await this.sequelize.authenticate();
+            await this.sequelize.authenticate({});
+            await this.sequelize.sync({force: false});
             console.log('connection has been established');
         } catch (error) {
             console.log('connection error: ' + error);
@@ -27,4 +38,7 @@ class PostgresConnection {
     }
 }
 
-module.exports = PostgresConnection;
+const db = new PostgresConnection();
+db.connection();
+
+module.exports = db;
