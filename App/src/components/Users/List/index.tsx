@@ -25,9 +25,9 @@ function UserList() {
     return (
         <div>
             {users &&
-            users.users.map(user => (
-                <UserListItem user={user} key={user.id}/>
-            ))
+                users.users.map(user => (
+                    <UserListItem user={user} key={user.id} />
+                ))
             }
         </div>
     )

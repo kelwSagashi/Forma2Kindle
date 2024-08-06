@@ -4,11 +4,11 @@ import { User } from '../../../../utils/Users/types'
 interface UserListeItemProps {
   user: User
 }
-function UserListItem({user}: UserListeItemProps) {
+function UserListItem({ user }: UserListeItemProps) {
   return (
     <div>
-        <div>{user.name}</div>
-        <div>{user.email}</div>
+      <div>{user.name}</div>
+      <div>{user.email}</div>
     </div>
   )
 }

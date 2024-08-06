@@ -1,12 +1,14 @@
 {
   "files": [],
   "compilerOptions": {
-    "lib": ["ESNext"],
+    "lib": [
+      "ESNext"
+    ],
     "strict": false,
     "baseUrl": "./",
     "paths": {
       "@utils/*": [
-          "./src/utils/*"
+        "src/utils/*"
       ],
     },
   },
