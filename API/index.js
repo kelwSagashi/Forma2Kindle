@@ -1,10 +1,11 @@
 const express = require("express");
 const cors = require('cors');
 const morgan = require('morgan');
-const db = require("./postgres/postgres");
-const { Pool } = require("pg");
 const { AllRoutes } = require("./src/routes");
-const UserSchema = require("./src/models/user");
+const PostgresConnection = require("./postgres/postgres");
+
+const db = new PostgresConnection();
+db.connection();
 
 const app = express(cors());
 

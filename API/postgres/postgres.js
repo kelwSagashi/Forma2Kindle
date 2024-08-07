@@ -32,13 +32,16 @@ class PostgresConnection {
             await this.sequelize.authenticate({});
             await this.sequelize.sync({force: false});
             console.log('connection has been established');
+
+            this.createTables();
         } catch (error) {
             console.log('connection error: ' + error);
         }
     }
+
+    async createTables(){
+        require("./src/models/user");
+    }
 }
 
-const db = new PostgresConnection();
-db.connection();
-
-module.exports = db;
+module.exports = PostgresConnection;
